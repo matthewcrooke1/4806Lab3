@@ -9,12 +9,17 @@ class Spellchecker
   #text_file_name is the path to a local file with text to train the model (find actual words and their #frequency)
   #verbose is a flag to show traces of what's going on (useful for large files)
   def initialize(text_file_name)
+	@dictionary = Hash.new(0)	
+	File.open(text_file_name, "r").each do |line|
+	train!(words(line))
+	end
     #read file text_file_name
     #extract words from string (file contents) using method 'words' below.
     #put in dictionary with their frequency (calling train! method)
   end
 
   def dictionary
+    return @dictionary.toHash
     #getter for instance attribute
   end
   
@@ -24,13 +29,18 @@ class Spellchecker
   end
 
   #train model (create dictionary)
-  def train!(word_list)
+  def train!(word_list)		
+	word_list.each  do |word|		
+	@dictionary[word] += 1
+	end
+	
     #create @dictionary, an attribute of type Hash mapping words to their count in the text {word => count}. Default count should be 0 (argument of Hash constructor).
   end
 
   #lookup frequency of a word, a simple lookup in the @dictionary Hash
   def lookup(word)
-  end
+       @dictionary[word]
+end
   
   #generate all correction candidates at an edit distance of 1 from the input word.
   def edits1(word)
