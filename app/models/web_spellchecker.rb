@@ -4,9 +4,13 @@ def initialize()
 
 end
 
-def correct(w)
-return ["testing", "purposes"]
-end 
+
+def known(words)
+	result = DictionaryWord.select("word,count").where(word:words).order(count: :desc)
+
+	return result.map{|x| x[:word]}
+end
+
 
 
 end
