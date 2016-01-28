@@ -43,9 +43,14 @@ class Spellchecker
 end
   
   #generate all correction candidates at an edit distance of 1 from the input word.
-  def edits1(word)
-    
-    deletes    = []
+  def edits1(word)	
+    deletes = []   
+    @index = 0;
+    word.[0..word.split.size]
+    deletes.insert(0,word)
+    unless @index > word.length
+      @index += 1
+    end	
     #all strings obtained by deleting a letter (each letter)
     transposes = []
     #all strings obtained by switching two consecutive letters
